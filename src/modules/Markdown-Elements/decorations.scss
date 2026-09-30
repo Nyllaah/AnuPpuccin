@@ -1,8 +1,40 @@
-/*-Decorations for bold and italics-*/
-.anp-decoration-toggle {
-    --italic-color: rgb(var(--anp-italic-color, var(--text-normal)));
+/*-Decorations for bold, italic, strikethrough, highlight, and inline code-*/
+.anp-decoration-toggle,
+.anp-bold-toggle {
     --bold-color: rgb(var(--anp-bold-color, var(--text-normal)));
+}
+
+.anp-decoration-toggle,
+.anp-italic-toggle {
+    --italic-color: rgb(var(--anp-italic-color, var(--text-normal)));
+}
+
+.anp-decoration-toggle,
+.anp-highlight-toggle {
     --text-highlight-bg: rgba(var(--anp-highlight-color, var(--ctp-yellow)), 0.2);
+    --text-highlight-bg-active: rgba(var(--anp-highlight-color, var(--ctp-yellow)), 0.4);
+}
+
+.anp-strikethrough-toggle {
+
+    .markdown-rendered del,
+    .markdown-rendered s,
+    .markdown-preview-view del,
+    .markdown-preview-view s,
+    .cm-s-obsidian span.cm-strikethrough,
+    .cm-s-obsidian span.cm-formatting-strikethrough {
+        color: rgb(var(--anp-strikethrough-color, var(--text-normal)));
+    }
+}
+
+.anp-inline-code-toggle {
+
+    .markdown-rendered :not(pre)>code,
+    .markdown-preview-view :not(pre)>code,
+    .cm-s-obsidian span.cm-inline-code,
+    .markdown-source-view.mod-cm6 .cm-line:not(.HyperMD-codeblock) span.cm-formatting-code {
+        color: rgb(var(--anp-inline-code-color, var(--text-normal)));
+    }
 }
 
 // Internal links have no underline

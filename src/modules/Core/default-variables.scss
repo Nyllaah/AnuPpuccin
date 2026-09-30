@@ -22,6 +22,14 @@ $accents: "rosewater", "flamingo", "pink", "mauve", "red", "maroon", "peach",
     .anp-highlight-#{$accent} {
         --anp-highlight-color: var(--ctp-#{$accent});
     }
+
+    .anp-strikethrough-#{$accent} {
+        --anp-strikethrough-color: var(--ctp-#{$accent});
+    }
+
+    .anp-inline-code-#{$accent} {
+        --anp-inline-code-color: var(--ctp-#{$accent});
+    }
 }
 
 /*------------------Actual Configs--------------------*/

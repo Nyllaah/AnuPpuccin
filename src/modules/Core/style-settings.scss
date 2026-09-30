@@ -1465,6 +1465,11 @@ settings:
     title: Enable Custom Heading Colors
     type: class-toggle
 -
+    id: anp-rainbow-headings
+    title: Rainbow headings
+    description: Colors h1 through h6 with the next distinct palette accent in reading view and the editor.
+    type: class-toggle
+-
     id: anp-header-margin-toggle
     title: Enable Custom Heading Margin
     type: class-toggle
@@ -2019,6 +2024,32 @@ settings:
 -
     id: anp-decoration-toggle
     title: Enable Decoration Colors
+    description: Colors bold, italic, and highlight together.
+    type: class-toggle
+-
+    id: anp-bold-toggle
+    title: Bold
+    description: Color bold text on its own.
+    type: class-toggle
+-
+    id: anp-italic-toggle
+    title: Italic
+    description: Color italic text on its own.
+    type: class-toggle
+-
+    id: anp-strikethrough-toggle
+    title: Strikethrough
+    description: Color strikethrough text.
+    type: class-toggle
+-
+    id: anp-highlight-toggle
+    title: Highlight
+    description: Color highlighted text on its own.
+    type: class-toggle
+-
+    id: anp-inline-code-toggle
+    title: Inline code
+    description: Color inline code.
     type: class-toggle
 -
     id: anp-bold-custom
@@ -2173,6 +2204,110 @@ settings:
     -
         label: Lavender
         value: anp-highlight-lavender
+-
+    id: anp-strikethrough-custom
+    title: Strikethrough Color
+    type: class-select
+    allowEmpty: false
+    default: anp-strikethrough-mauve
+    options:
+    -
+        label: None
+        value: none
+    -
+        label: Rosewater
+        value: anp-strikethrough-rosewater
+    -
+        label: Flamingo
+        value: anp-strikethrough-flamingo
+    -
+        label: Pink
+        value: anp-strikethrough-pink
+    -
+        label: Mauve
+        value: anp-strikethrough-mauve
+    -
+        label: Red
+        value: anp-strikethrough-red
+    -
+        label: Maroon
+        value: anp-strikethrough-maroon
+    -
+        label: Peach
+        value: anp-strikethrough-peach
+    -
+        label: Yellow
+        value: anp-strikethrough-yellow
+    -
+        label: Green
+        value: anp-strikethrough-green
+    -
+        label: Teal
+        value: anp-strikethrough-teal
+    -
+        label: Sky
+        value: anp-strikethrough-sky
+    -
+        label: Sapphire
+        value: anp-strikethrough-sapphire
+    -
+        label: Blue
+        value: anp-strikethrough-blue
+    -
+        label: Lavender
+        value: anp-strikethrough-lavender
+-
+    id: anp-inline-code-custom
+    title: Inline Code Color
+    type: class-select
+    allowEmpty: false
+    default: anp-inline-code-sky
+    options:
+    -
+        label: None
+        value: none
+    -
+        label: Rosewater
+        value: anp-inline-code-rosewater
+    -
+        label: Flamingo
+        value: anp-inline-code-flamingo
+    -
+        label: Pink
+        value: anp-inline-code-pink
+    -
+        label: Mauve
+        value: anp-inline-code-mauve
+    -
+        label: Red
+        value: anp-inline-code-red
+    -
+        label: Maroon
+        value: anp-inline-code-maroon
+    -
+        label: Peach
+        value: anp-inline-code-peach
+    -
+        label: Yellow
+        value: anp-inline-code-yellow
+    -
+        label: Green
+        value: anp-inline-code-green
+    -
+        label: Teal
+        value: anp-inline-code-teal
+    -
+        label: Sky
+        value: anp-inline-code-sky
+    -
+        label: Sapphire
+        value: anp-inline-code-sapphire
+    -
+        label: Blue
+        value: anp-inline-code-blue
+    -
+        label: Lavender
+        value: anp-inline-code-lavender
 
 # Workspace
 
