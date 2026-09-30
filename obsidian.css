@@ -7462,72 +7462,116 @@ None of the original code was used and the feature was implemented from scratch.
 * https://www.buymeacoffee.com/anubisnekhet
 *===============================================================*/
 /*---------------------------------------------------------------
-* RAIBOW FOLDER VARIABLE
-
-* --rainbow-folder-color is a raw rgb variable whose value
-* is cycled per child folder in a folder tree.
-* Applying "inherit" to every child folder excluding first-order
-* child folders results in folders "inheriting" their parent
-* folder colors.
+* RAINBOW FOLDER VARIABLE
+*
+* --rainbow-folder-color cycles the Rose Pine light accents that are
+* actually different. Consecutive Catppuccin tokens with the same hex
+* (maroon, teal, sapphire, blue, mauve) are not neighboring steps.
+* The hidden vault root (.nav-folder.mod-root) does not take a slot.
+* Root folders start from parent slot 0, so the first one is step 1.
+* A nested folder continues after its parent:
+*   childSlot = parentSlot + sibling-index()
+* wrapped into the palette. The parent slot is passed down on
+* .nav-folder-children / .tree-item-children so the folder does not
+* read its own slot as the parent slot.
+*
+* sibling-index(), mod(), and if() are emitted as plain CSS.
+* Sass 1.69 would otherwise evaluate mod() and if() at build time.
 *---------------------------------------------------------------*/
-.nav-folder-children > .nav-folder:nth-child(11n+2),
-.nav-files-container > div > .nav-folder:nth-child(11n+2),
-[data-type=bookmarks] .tree-item:nth-child(11n+2) {
-  --rainbow-folder-color: var(--ctp-red);
+@property --anp-rainbow-parent-slot {
+  syntax: "<integer>";
+  inherits: true;
+  initial-value: 0;
 }
-.nav-folder-children > .nav-folder:nth-child(11n+3),
-.nav-files-container > div > .nav-folder:nth-child(11n+3),
-[data-type=bookmarks] .tree-item:nth-child(11n+3) {
-  --rainbow-folder-color: var(--ctp-maroon);
+@property --anp-rainbow-slot {
+  syntax: "<integer>";
+  inherits: true;
+  initial-value: 0;
 }
-.nav-folder-children > .nav-folder:nth-child(11n+4),
-.nav-files-container > div > .nav-folder:nth-child(11n+4),
-[data-type=bookmarks] .tree-item:nth-child(11n+4) {
-  --rainbow-folder-color: var(--ctp-peach);
+@property --anp-rainbow-wrapped {
+  syntax: "<integer>";
+  inherits: false;
+  initial-value: 0;
 }
-.nav-folder-children > .nav-folder:nth-child(11n+5),
-.nav-files-container > div > .nav-folder:nth-child(11n+5),
-[data-type=bookmarks] .tree-item:nth-child(11n+5) {
-  --rainbow-folder-color: var(--ctp-yellow);
-}
-.nav-folder-children > .nav-folder:nth-child(11n+6),
-.nav-files-container > div > .nav-folder:nth-child(11n+6),
-[data-type=bookmarks] .tree-item:nth-child(11n+6) {
-  --rainbow-folder-color: var(--ctp-green);
-}
-.nav-folder-children > .nav-folder:nth-child(11n+7),
-.nav-files-container > div > .nav-folder:nth-child(11n+7),
-[data-type=bookmarks] .tree-item:nth-child(11n+7) {
-  --rainbow-folder-color: var(--ctp-teal);
-}
-.nav-folder-children > .nav-folder:nth-child(11n+8),
-.nav-files-container > div > .nav-folder:nth-child(11n+8),
-[data-type=bookmarks] .tree-item:nth-child(11n+8) {
-  --rainbow-folder-color: var(--ctp-sky);
-}
-.nav-folder-children > .nav-folder:nth-child(11n+9),
-.nav-files-container > div > .nav-folder:nth-child(11n+9),
-[data-type=bookmarks] .tree-item:nth-child(11n+9) {
-  --rainbow-folder-color: var(--ctp-sapphire);
-}
-.nav-folder-children > .nav-folder:nth-child(11n+10),
-.nav-files-container > div > .nav-folder:nth-child(11n+10),
-[data-type=bookmarks] .tree-item:nth-child(11n+10) {
-  --rainbow-folder-color: var(--ctp-blue);
-}
-.nav-folder-children > .nav-folder:nth-child(11n+11),
-.nav-files-container > div > .nav-folder:nth-child(11n+11),
-[data-type=bookmarks] .tree-item:nth-child(11n+11) {
-  --rainbow-folder-color: var(--ctp-lavender);
-}
-.nav-folder-children > .nav-folder:nth-child(11n+12),
-.nav-files-container > div > .nav-folder:nth-child(11n+12),
-[data-type=bookmarks] .tree-item:nth-child(11n+12) {
-  --rainbow-folder-color: var(--ctp-mauve);
+.nav-folder:not(.mod-root),
+[data-type=bookmarks] .tree-item {
+  container-name: anp-rainbow-folder;
+  container-type: normal;
+  --anp-rainbow-slot: calc(var(--anp-rainbow-parent-slot) + sibling-index());
+  --anp-rainbow-wrapped: calc(mod(var(--anp-rainbow-slot) - 1, 6));
+  --rainbow-folder-color: if(style(--anp-rainbow-wrapped: 0): var(--ctp-red); style(--anp-rainbow-wrapped: 1): var(--ctp-peach); style(--anp-rainbow-wrapped: 2): var(--ctp-yellow); style(--anp-rainbow-wrapped: 3): var(--ctp-green); style(--anp-rainbow-wrapped: 4): var(--ctp-sky); style(--anp-rainbow-wrapped: 5): var(--ctp-lavender); else: var(--ctp-red));
 }
 
-.anp-rainbow-subfolder-color-toggle .nav-files-container .nav-folder.nav-folder .nav-folder,
-.anp-rainbow-subfolder-color-toggle [data-type=bookmarks] .tree-item .tree-item {
+.nav-folder:not(.mod-root) > .nav-folder-children,
+[data-type=bookmarks] .tree-item > .tree-item-children {
+  --anp-rainbow-parent-slot: var(--anp-rainbow-slot);
+}
+
+/* Descendants read the nearest folder's wrapped slot, not an ancestor's. */
+@container anp-rainbow-folder style(--anp-rainbow-wrapped: 0) {
+  .nav-folder-title,
+  .nav-folder-children,
+  .tree-item-icon,
+  .obsidian-icon-folder-icon,
+  [data-type=bookmarks] .tree-item-inner,
+  [data-type=bookmarks] .tree-item-children {
+    --rainbow-folder-color: var(--ctp-red);
+  }
+}
+@container anp-rainbow-folder style(--anp-rainbow-wrapped: 1) {
+  .nav-folder-title,
+  .nav-folder-children,
+  .tree-item-icon,
+  .obsidian-icon-folder-icon,
+  [data-type=bookmarks] .tree-item-inner,
+  [data-type=bookmarks] .tree-item-children {
+    --rainbow-folder-color: var(--ctp-peach);
+  }
+}
+@container anp-rainbow-folder style(--anp-rainbow-wrapped: 2) {
+  .nav-folder-title,
+  .nav-folder-children,
+  .tree-item-icon,
+  .obsidian-icon-folder-icon,
+  [data-type=bookmarks] .tree-item-inner,
+  [data-type=bookmarks] .tree-item-children {
+    --rainbow-folder-color: var(--ctp-yellow);
+  }
+}
+@container anp-rainbow-folder style(--anp-rainbow-wrapped: 3) {
+  .nav-folder-title,
+  .nav-folder-children,
+  .tree-item-icon,
+  .obsidian-icon-folder-icon,
+  [data-type=bookmarks] .tree-item-inner,
+  [data-type=bookmarks] .tree-item-children {
+    --rainbow-folder-color: var(--ctp-green);
+  }
+}
+@container anp-rainbow-folder style(--anp-rainbow-wrapped: 4) {
+  .nav-folder-title,
+  .nav-folder-children,
+  .tree-item-icon,
+  .obsidian-icon-folder-icon,
+  [data-type=bookmarks] .tree-item-inner,
+  [data-type=bookmarks] .tree-item-children {
+    --rainbow-folder-color: var(--ctp-sky);
+  }
+}
+@container anp-rainbow-folder style(--anp-rainbow-wrapped: 5) {
+  .nav-folder-title,
+  .nav-folder-children,
+  .tree-item-icon,
+  .obsidian-icon-folder-icon,
+  [data-type=bookmarks] .tree-item-inner,
+  [data-type=bookmarks] .tree-item-children {
+    --rainbow-folder-color: var(--ctp-lavender);
+  }
+}
+/* Subfolder inheritance: nested folders keep the parent slot instead of advancing. */
+.anp-rainbow-subfolder-color-toggle .nav-folder:not(.mod-root) > .nav-folder-children > .nav-folder,
+.anp-rainbow-subfolder-color-toggle [data-type=bookmarks] .tree-item > .tree-item-children > .tree-item {
+  --anp-rainbow-slot: var(--anp-rainbow-parent-slot);
   --rainbow-folder-color: inherit;
 }
 
@@ -7616,6 +7660,7 @@ None of the original code was used and the feature was implemented from scratch.
 .anp-simple-rainbow-color-toggle.anp-simple-rainbow-title-toggle .nav-files-container > div > .nav-folder .nav-folder-title,
 .anp-simple-rainbow-color-toggle.anp-simple-rainbow-title-toggle [data-type=bookmarks] .tree-item .tree-item-inner {
   transition: color 0.4s;
+  font-weight: 700;
   color: rgba(var(--rainbow-folder-color), var(--anp-simple-rainbow-opacity, 1));
   --nav-item-background-hover: rgba(var(--rainbow-folder-color), 0.1);
   --nav-item-background-active: rgba(var(--rainbow-folder-color), 0.1);

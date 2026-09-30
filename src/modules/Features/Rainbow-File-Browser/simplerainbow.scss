@@ -9,6 +9,7 @@
         .nav-files-container>div>.nav-folder .nav-folder-title,
         [data-type="bookmarks"] .tree-item .tree-item-inner {
             transition: color 0.4s;
+            font-weight: 700;
             color: rgba(var(--rainbow-folder-color),
                     var(--anp-simple-rainbow-opacity, 1));
             --nav-item-background-hover: rgba(var(--rainbow-folder-color), 0.1);

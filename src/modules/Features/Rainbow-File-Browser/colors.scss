@@ -1,64 +1,90 @@
 /*---------------------------------------------------------------
-* RAIBOW FOLDER VARIABLE
-
-* --rainbow-folder-color is a raw rgb variable whose value
-* is cycled per child folder in a folder tree.
-* Applying "inherit" to every child folder excluding first-order
-* child folders results in folders "inheriting" their parent
-* folder colors.
+* RAINBOW FOLDER VARIABLE
+*
+* --rainbow-folder-color cycles the Rose Pine light accents that are
+* actually different. Consecutive Catppuccin tokens with the same hex
+* (maroon, teal, sapphire, blue, mauve) are not neighboring steps.
+* The hidden vault root (.nav-folder.mod-root) does not take a slot.
+* Root folders start from parent slot 0, so the first one is step 1.
+* A nested folder continues after its parent:
+*   childSlot = parentSlot + sibling-index()
+* wrapped into the palette. The parent slot is passed down on
+* .nav-folder-children / .tree-item-children so the folder does not
+* read its own slot as the parent slot.
+*
+* sibling-index(), mod(), and if() are emitted as plain CSS.
+* Sass 1.69 would otherwise evaluate mod() and if() at build time.
 *---------------------------------------------------------------*/
-.nav-folder-children>.nav-folder,
-.nav-files-container>div>.nav-folder,
+
+$anp-rainbow-colors: "red", "peach", "yellow", "green", "sky", "lavender";
+$anp-rainbow-length: length($anp-rainbow-colors);
+
+$anp-rainbow-if: "if(";
+
+@for $index from 1 through length($anp-rainbow-colors) {
+    $wrapped: $index - 1;
+    $color: nth($anp-rainbow-colors, $index);
+    $anp-rainbow-if: $anp-rainbow-if + "style(--anp-rainbow-wrapped: #{$wrapped}): var(--ctp-#{$color}); ";
+}
+
+$anp-rainbow-if: $anp-rainbow-if + "else: var(--ctp-red))";
+
+@property --anp-rainbow-parent-slot {
+    syntax: "<integer>";
+    inherits: true;
+    initial-value: 0;
+}
+
+@property --anp-rainbow-slot {
+    syntax: "<integer>";
+    inherits: true;
+    initial-value: 0;
+}
+
+@property --anp-rainbow-wrapped {
+    syntax: "<integer>";
+    inherits: false;
+    initial-value: 0;
+}
+
+.nav-folder:not(.mod-root),
 [data-type="bookmarks"] .tree-item {
-    &:nth-child(11n + 2) {
-        --rainbow-folder-color: var(--ctp-red);
-    }
+    container-name: anp-rainbow-folder;
+    container-type: normal;
+    --anp-rainbow-slot: #{"calc(var(--anp-rainbow-parent-slot) + sibling-index())"};
+    --anp-rainbow-wrapped: #{"calc(mod(var(--anp-rainbow-slot) - 1, " + $anp-rainbow-length + "))"};
+    --rainbow-folder-color: #{$anp-rainbow-if};
+}
 
-    &:nth-child(11n + 3) {
-        --rainbow-folder-color: var(--ctp-maroon);
-    }
+.nav-folder:not(.mod-root)>.nav-folder-children,
+[data-type="bookmarks"] .tree-item>.tree-item-children {
+    --anp-rainbow-parent-slot: var(--anp-rainbow-slot);
+}
 
-    &:nth-child(11n + 4) {
-        --rainbow-folder-color: var(--ctp-peach);
-    }
+/* Descendants read the nearest folder's wrapped slot, not an ancestor's. */
+@for $index from 1 through length($anp-rainbow-colors) {
+    $wrapped: $index - 1;
+    $color: nth($anp-rainbow-colors, $index);
 
-    &:nth-child(11n + 5) {
-        --rainbow-folder-color: var(--ctp-yellow);
-    }
+    @container anp-rainbow-folder style(--anp-rainbow-wrapped: #{$wrapped}) {
 
-    &:nth-child(11n + 6) {
-        --rainbow-folder-color: var(--ctp-green);
-    }
-
-    &:nth-child(11n + 7) {
-        --rainbow-folder-color: var(--ctp-teal);
-    }
-
-    &:nth-child(11n + 8) {
-        --rainbow-folder-color: var(--ctp-sky);
-    }
-
-    &:nth-child(11n + 9) {
-        --rainbow-folder-color: var(--ctp-sapphire);
-    }
-
-    &:nth-child(11n + 10) {
-        --rainbow-folder-color: var(--ctp-blue);
-    }
-
-    &:nth-child(11n + 11) {
-        --rainbow-folder-color: var(--ctp-lavender);
-    }
-
-    &:nth-child(11n + 12) {
-        --rainbow-folder-color: var(--ctp-mauve);
+        .nav-folder-title,
+        .nav-folder-children,
+        .tree-item-icon,
+        .obsidian-icon-folder-icon,
+        [data-type="bookmarks"] .tree-item-inner,
+        [data-type="bookmarks"] .tree-item-children {
+            --rainbow-folder-color: var(--ctp-#{$color});
+        }
     }
 }
 
+/* Subfolder inheritance: nested folders keep the parent slot instead of advancing. */
 .anp-rainbow-subfolder-color-toggle {
 
-    .nav-files-container .nav-folder.nav-folder .nav-folder,
-    [data-type="bookmarks"] .tree-item .tree-item {
+    .nav-folder:not(.mod-root)>.nav-folder-children>.nav-folder,
+    [data-type="bookmarks"] .tree-item>.tree-item-children>.tree-item {
+        --anp-rainbow-slot: var(--anp-rainbow-parent-slot);
         --rainbow-folder-color: inherit;
     }
 }
