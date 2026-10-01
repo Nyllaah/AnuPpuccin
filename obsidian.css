@@ -1479,6 +1479,11 @@ settings:
     title: Enable Custom Heading Colors
     type: class-toggle
 -
+    id: anp-rainbow-headings
+    title: Rainbow headings
+    description: Colors h1 through h6 with the next distinct palette accent in reading view and the editor.
+    type: class-toggle
+-
     id: anp-header-margin-toggle
     title: Enable Custom Heading Margin
     type: class-toggle
@@ -2033,6 +2038,32 @@ settings:
 -
     id: anp-decoration-toggle
     title: Enable Decoration Colors
+    description: Colors bold, italic, and highlight together.
+    type: class-toggle
+-
+    id: anp-bold-toggle
+    title: Bold
+    description: Color bold text on its own.
+    type: class-toggle
+-
+    id: anp-italic-toggle
+    title: Italic
+    description: Color italic text on its own.
+    type: class-toggle
+-
+    id: anp-strikethrough-toggle
+    title: Strikethrough
+    description: Color strikethrough text.
+    type: class-toggle
+-
+    id: anp-highlight-toggle
+    title: Highlight
+    description: Color highlighted text on its own.
+    type: class-toggle
+-
+    id: anp-inline-code-toggle
+    title: Inline code
+    description: Color inline code.
     type: class-toggle
 -
     id: anp-bold-custom
@@ -2187,6 +2218,110 @@ settings:
     -
         label: Lavender
         value: anp-highlight-lavender
+-
+    id: anp-strikethrough-custom
+    title: Strikethrough Color
+    type: class-select
+    allowEmpty: false
+    default: anp-strikethrough-mauve
+    options:
+    -
+        label: None
+        value: none
+    -
+        label: Rosewater
+        value: anp-strikethrough-rosewater
+    -
+        label: Flamingo
+        value: anp-strikethrough-flamingo
+    -
+        label: Pink
+        value: anp-strikethrough-pink
+    -
+        label: Mauve
+        value: anp-strikethrough-mauve
+    -
+        label: Red
+        value: anp-strikethrough-red
+    -
+        label: Maroon
+        value: anp-strikethrough-maroon
+    -
+        label: Peach
+        value: anp-strikethrough-peach
+    -
+        label: Yellow
+        value: anp-strikethrough-yellow
+    -
+        label: Green
+        value: anp-strikethrough-green
+    -
+        label: Teal
+        value: anp-strikethrough-teal
+    -
+        label: Sky
+        value: anp-strikethrough-sky
+    -
+        label: Sapphire
+        value: anp-strikethrough-sapphire
+    -
+        label: Blue
+        value: anp-strikethrough-blue
+    -
+        label: Lavender
+        value: anp-strikethrough-lavender
+-
+    id: anp-inline-code-custom
+    title: Inline Code Color
+    type: class-select
+    allowEmpty: false
+    default: anp-inline-code-sky
+    options:
+    -
+        label: None
+        value: none
+    -
+        label: Rosewater
+        value: anp-inline-code-rosewater
+    -
+        label: Flamingo
+        value: anp-inline-code-flamingo
+    -
+        label: Pink
+        value: anp-inline-code-pink
+    -
+        label: Mauve
+        value: anp-inline-code-mauve
+    -
+        label: Red
+        value: anp-inline-code-red
+    -
+        label: Maroon
+        value: anp-inline-code-maroon
+    -
+        label: Peach
+        value: anp-inline-code-peach
+    -
+        label: Yellow
+        value: anp-inline-code-yellow
+    -
+        label: Green
+        value: anp-inline-code-green
+    -
+        label: Teal
+        value: anp-inline-code-teal
+    -
+        label: Sky
+        value: anp-inline-code-sky
+    -
+        label: Sapphire
+        value: anp-inline-code-sapphire
+    -
+        label: Blue
+        value: anp-inline-code-blue
+    -
+        label: Lavender
+        value: anp-inline-code-lavender
 
 # Workspace
 
@@ -2954,6 +3089,14 @@ settings:
   --anp-highlight-color: var(--ctp-rosewater);
 }
 
+.anp-strikethrough-rosewater {
+  --anp-strikethrough-color: var(--ctp-rosewater);
+}
+
+.anp-inline-code-rosewater {
+  --anp-inline-code-color: var(--ctp-rosewater);
+}
+
 .anuppuccin-accent-toggle.ctp-accent-flamingo {
   --ctp-accent: var(--ctp-flamingo);
 }
@@ -2972,6 +3115,14 @@ settings:
 
 .anp-highlight-flamingo {
   --anp-highlight-color: var(--ctp-flamingo);
+}
+
+.anp-strikethrough-flamingo {
+  --anp-strikethrough-color: var(--ctp-flamingo);
+}
+
+.anp-inline-code-flamingo {
+  --anp-inline-code-color: var(--ctp-flamingo);
 }
 
 .anuppuccin-accent-toggle.ctp-accent-pink {
@@ -2994,6 +3145,14 @@ settings:
   --anp-highlight-color: var(--ctp-pink);
 }
 
+.anp-strikethrough-pink {
+  --anp-strikethrough-color: var(--ctp-pink);
+}
+
+.anp-inline-code-pink {
+  --anp-inline-code-color: var(--ctp-pink);
+}
+
 .anuppuccin-accent-toggle.ctp-accent-mauve {
   --ctp-accent: var(--ctp-mauve);
 }
@@ -3012,6 +3171,14 @@ settings:
 
 .anp-highlight-mauve {
   --anp-highlight-color: var(--ctp-mauve);
+}
+
+.anp-strikethrough-mauve {
+  --anp-strikethrough-color: var(--ctp-mauve);
+}
+
+.anp-inline-code-mauve {
+  --anp-inline-code-color: var(--ctp-mauve);
 }
 
 .anuppuccin-accent-toggle.ctp-accent-red {
@@ -3034,6 +3201,14 @@ settings:
   --anp-highlight-color: var(--ctp-red);
 }
 
+.anp-strikethrough-red {
+  --anp-strikethrough-color: var(--ctp-red);
+}
+
+.anp-inline-code-red {
+  --anp-inline-code-color: var(--ctp-red);
+}
+
 .anuppuccin-accent-toggle.ctp-accent-maroon {
   --ctp-accent: var(--ctp-maroon);
 }
@@ -3052,6 +3227,14 @@ settings:
 
 .anp-highlight-maroon {
   --anp-highlight-color: var(--ctp-maroon);
+}
+
+.anp-strikethrough-maroon {
+  --anp-strikethrough-color: var(--ctp-maroon);
+}
+
+.anp-inline-code-maroon {
+  --anp-inline-code-color: var(--ctp-maroon);
 }
 
 .anuppuccin-accent-toggle.ctp-accent-peach {
@@ -3074,6 +3257,14 @@ settings:
   --anp-highlight-color: var(--ctp-peach);
 }
 
+.anp-strikethrough-peach {
+  --anp-strikethrough-color: var(--ctp-peach);
+}
+
+.anp-inline-code-peach {
+  --anp-inline-code-color: var(--ctp-peach);
+}
+
 .anuppuccin-accent-toggle.ctp-accent-yellow {
   --ctp-accent: var(--ctp-yellow);
 }
@@ -3092,6 +3283,14 @@ settings:
 
 .anp-highlight-yellow {
   --anp-highlight-color: var(--ctp-yellow);
+}
+
+.anp-strikethrough-yellow {
+  --anp-strikethrough-color: var(--ctp-yellow);
+}
+
+.anp-inline-code-yellow {
+  --anp-inline-code-color: var(--ctp-yellow);
 }
 
 .anuppuccin-accent-toggle.ctp-accent-green {
@@ -3114,6 +3313,14 @@ settings:
   --anp-highlight-color: var(--ctp-green);
 }
 
+.anp-strikethrough-green {
+  --anp-strikethrough-color: var(--ctp-green);
+}
+
+.anp-inline-code-green {
+  --anp-inline-code-color: var(--ctp-green);
+}
+
 .anuppuccin-accent-toggle.ctp-accent-teal {
   --ctp-accent: var(--ctp-teal);
 }
@@ -3132,6 +3339,14 @@ settings:
 
 .anp-highlight-teal {
   --anp-highlight-color: var(--ctp-teal);
+}
+
+.anp-strikethrough-teal {
+  --anp-strikethrough-color: var(--ctp-teal);
+}
+
+.anp-inline-code-teal {
+  --anp-inline-code-color: var(--ctp-teal);
 }
 
 .anuppuccin-accent-toggle.ctp-accent-sky {
@@ -3154,6 +3369,14 @@ settings:
   --anp-highlight-color: var(--ctp-sky);
 }
 
+.anp-strikethrough-sky {
+  --anp-strikethrough-color: var(--ctp-sky);
+}
+
+.anp-inline-code-sky {
+  --anp-inline-code-color: var(--ctp-sky);
+}
+
 .anuppuccin-accent-toggle.ctp-accent-sapphire {
   --ctp-accent: var(--ctp-sapphire);
 }
@@ -3172,6 +3395,14 @@ settings:
 
 .anp-highlight-sapphire {
   --anp-highlight-color: var(--ctp-sapphire);
+}
+
+.anp-strikethrough-sapphire {
+  --anp-strikethrough-color: var(--ctp-sapphire);
+}
+
+.anp-inline-code-sapphire {
+  --anp-inline-code-color: var(--ctp-sapphire);
 }
 
 .anuppuccin-accent-toggle.ctp-accent-blue {
@@ -3194,6 +3425,14 @@ settings:
   --anp-highlight-color: var(--ctp-blue);
 }
 
+.anp-strikethrough-blue {
+  --anp-strikethrough-color: var(--ctp-blue);
+}
+
+.anp-inline-code-blue {
+  --anp-inline-code-color: var(--ctp-blue);
+}
+
 .anuppuccin-accent-toggle.ctp-accent-lavender {
   --ctp-accent: var(--ctp-lavender);
 }
@@ -3212,6 +3451,14 @@ settings:
 
 .anp-highlight-lavender {
   --anp-highlight-color: var(--ctp-lavender);
+}
+
+.anp-strikethrough-lavender {
+  --anp-strikethrough-color: var(--ctp-lavender);
+}
+
+.anp-inline-code-lavender {
+  --anp-inline-code-color: var(--ctp-lavender);
 }
 
 /*------------------Actual Configs--------------------*/
@@ -4924,11 +5171,37 @@ Support me: https://buymeacoffee.com/AnubisNekhet
   padding: 5px 5px 5px 10px;
 }
 
-/*-Decorations for bold and italics-*/
-.anp-decoration-toggle {
-  --italic-color: rgb(var(--anp-italic-color, var(--text-normal)));
+/*-Decorations for bold, italic, strikethrough, highlight, and inline code-*/
+.anp-decoration-toggle,
+.anp-bold-toggle {
   --bold-color: rgb(var(--anp-bold-color, var(--text-normal)));
+}
+
+.anp-decoration-toggle,
+.anp-italic-toggle {
+  --italic-color: rgb(var(--anp-italic-color, var(--text-normal)));
+}
+
+.anp-decoration-toggle,
+.anp-highlight-toggle {
   --text-highlight-bg: rgba(var(--anp-highlight-color, var(--ctp-yellow)), 0.2);
+  --text-highlight-bg-active: rgba(var(--anp-highlight-color, var(--ctp-yellow)), 0.4);
+}
+
+.anp-strikethrough-toggle .markdown-rendered del,
+.anp-strikethrough-toggle .markdown-rendered s,
+.anp-strikethrough-toggle .markdown-preview-view del,
+.anp-strikethrough-toggle .markdown-preview-view s,
+.anp-strikethrough-toggle .cm-s-obsidian span.cm-strikethrough,
+.anp-strikethrough-toggle .cm-s-obsidian span.cm-formatting-strikethrough {
+  color: rgb(var(--anp-strikethrough-color, var(--text-normal)));
+}
+
+.anp-inline-code-toggle .markdown-rendered :not(pre) > code,
+.anp-inline-code-toggle .markdown-preview-view :not(pre) > code,
+.anp-inline-code-toggle .cm-s-obsidian span.cm-inline-code,
+.anp-inline-code-toggle .markdown-source-view.mod-cm6 .cm-line:not(.HyperMD-codeblock) span.cm-formatting-code {
+  color: rgb(var(--anp-inline-code-color, var(--text-normal)));
 }
 
 .markdown-rendered .internal-link {
@@ -5551,6 +5824,106 @@ video {
   --h4-font: var(--anp-editor-font);
   --h5-font: var(--anp-editor-font);
   --h6-font: var(--anp-editor-font);
+}
+
+/* Rainbow headings: same distinct accent order as rainbow folders.
+ * Rose Pine light repeats several Catppuccin tokens, so this skips
+ * maroon, teal, sapphire, blue, and mauve. h1–h6 take one color each.
+ */
+.anp-rainbow-headings {
+  --h1-color: rgb(var(--ctp-red));
+}
+.anp-rainbow-headings .markdown-preview-view h1,
+.anp-rainbow-headings .markdown-rendered h1,
+.anp-rainbow-headings .cm-header-1,
+.anp-rainbow-headings .HyperMD-header-1,
+.anp-rainbow-headings .cm-formatting-header-1 {
+  color: var(--h1-color);
+}
+
+.anp-header-color-toggle.anp-rainbow-headings .app-container,
+.anp-header-color-toggle.anp-rainbow-headings .print {
+  --h1-color: rgb(var(--ctp-red));
+}
+
+.anp-rainbow-headings {
+  --h2-color: rgb(var(--ctp-peach));
+}
+.anp-rainbow-headings .markdown-preview-view h2,
+.anp-rainbow-headings .markdown-rendered h2,
+.anp-rainbow-headings .cm-header-2,
+.anp-rainbow-headings .HyperMD-header-2,
+.anp-rainbow-headings .cm-formatting-header-2 {
+  color: var(--h2-color);
+}
+
+.anp-header-color-toggle.anp-rainbow-headings .app-container,
+.anp-header-color-toggle.anp-rainbow-headings .print {
+  --h2-color: rgb(var(--ctp-peach));
+}
+
+.anp-rainbow-headings {
+  --h3-color: rgb(var(--ctp-yellow));
+}
+.anp-rainbow-headings .markdown-preview-view h3,
+.anp-rainbow-headings .markdown-rendered h3,
+.anp-rainbow-headings .cm-header-3,
+.anp-rainbow-headings .HyperMD-header-3,
+.anp-rainbow-headings .cm-formatting-header-3 {
+  color: var(--h3-color);
+}
+
+.anp-header-color-toggle.anp-rainbow-headings .app-container,
+.anp-header-color-toggle.anp-rainbow-headings .print {
+  --h3-color: rgb(var(--ctp-yellow));
+}
+
+.anp-rainbow-headings {
+  --h4-color: rgb(var(--ctp-green));
+}
+.anp-rainbow-headings .markdown-preview-view h4,
+.anp-rainbow-headings .markdown-rendered h4,
+.anp-rainbow-headings .cm-header-4,
+.anp-rainbow-headings .HyperMD-header-4,
+.anp-rainbow-headings .cm-formatting-header-4 {
+  color: var(--h4-color);
+}
+
+.anp-header-color-toggle.anp-rainbow-headings .app-container,
+.anp-header-color-toggle.anp-rainbow-headings .print {
+  --h4-color: rgb(var(--ctp-green));
+}
+
+.anp-rainbow-headings {
+  --h5-color: rgb(var(--ctp-sky));
+}
+.anp-rainbow-headings .markdown-preview-view h5,
+.anp-rainbow-headings .markdown-rendered h5,
+.anp-rainbow-headings .cm-header-5,
+.anp-rainbow-headings .HyperMD-header-5,
+.anp-rainbow-headings .cm-formatting-header-5 {
+  color: var(--h5-color);
+}
+
+.anp-header-color-toggle.anp-rainbow-headings .app-container,
+.anp-header-color-toggle.anp-rainbow-headings .print {
+  --h5-color: rgb(var(--ctp-sky));
+}
+
+.anp-rainbow-headings {
+  --h6-color: rgb(var(--ctp-lavender));
+}
+.anp-rainbow-headings .markdown-preview-view h6,
+.anp-rainbow-headings .markdown-rendered h6,
+.anp-rainbow-headings .cm-header-6,
+.anp-rainbow-headings .HyperMD-header-6,
+.anp-rainbow-headings .cm-formatting-header-6 {
+  color: var(--h6-color);
+}
+
+.anp-header-color-toggle.anp-rainbow-headings .app-container,
+.anp-header-color-toggle.anp-rainbow-headings .print {
+  --h6-color: rgb(var(--ctp-lavender));
 }
 
 .hide-comment-indicators .is-live-preview .cm-line:not(.cm-active) .cm-comment-start,

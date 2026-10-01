@@ -71,3 +71,34 @@ $accents: "rosewater", "flamingo", "pink", "mauve", "red", "maroon", "peach",
     --h5-font: var(--anp-editor-font);
     --h6-font: var(--anp-editor-font);
 }
+
+/* Rainbow headings: same distinct accent order as rainbow folders.
+ * Rose Pine light repeats several Catppuccin tokens, so this skips
+ * maroon, teal, sapphire, blue, and mauve. h1–h6 take one color each.
+ */
+$anp-rainbow-heading-colors: "red", "peach", "yellow", "green", "sky", "lavender";
+
+@for $i from 1 through length($anp-rainbow-heading-colors) {
+    $color: nth($anp-rainbow-heading-colors, $i);
+
+    .anp-rainbow-headings {
+        --h#{$i}-color: rgb(var(--ctp-#{$color}));
+
+        .markdown-preview-view h#{$i},
+        .markdown-rendered h#{$i},
+        .cm-header-#{$i},
+        .HyperMD-header-#{$i},
+        .cm-formatting-header-#{$i} {
+            color: var(--h#{$i}-color);
+        }
+    }
+
+    // Wins over per-level custom heading colors when both toggles are on.
+    .anp-header-color-toggle.anp-rainbow-headings {
+
+        .app-container,
+        .print {
+            --h#{$i}-color: rgb(var(--ctp-#{$color}));
+        }
+    }
+}
